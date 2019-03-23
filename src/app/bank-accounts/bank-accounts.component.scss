@@ -1,0 +1,18 @@
+.card .card-header-danger:not(.card-header-icon):not(.card-header-text), .card.bg-danger, .card.card-rotate.bg-danger .front, .card.card-rotate.bg-danger .back{
+    background: linear-gradient(135deg, #525AAD 0%, #252C5D 100%);
+}
+.men-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1%;
+}
+.st-field{
+    width: 100px;
+}
+.st-th{
+    cursor: pointer;
+}
+.st-i{
+    font-size: 16px; 
+}

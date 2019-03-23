@@ -1,0 +1,98 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">Companies</h4>
+                      <p class="card-category text-center"> Info about companies</p>
+                  </div>
+                  <div class="men-nav">
+                    <button routerLink='./create' mat-fab color="primary" class="ml-2">
+                            <i class="material-icons">add</i>
+                    </button>
+                    <mat-paginator
+                        [length]="count"
+                        [pageSize]="perPage"
+                        [pageSizeOptions]="[10, 20, 50]"
+                        (page)="onChangePage($event)"
+                        >
+                    </mat-paginator>
+                  </div>
+
+                  <div class="card-body">
+                        <div class="table-responsive">
+                                <table class="table">
+                                        <tbody>                                      
+                                            <tr [formGroup]="searchForm">       
+                                                <td>
+                                                    <button mat-button color="primary" (click)='searchForm.reset()'><i class="material-icons">close</i></button>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex justify-content-around align-items-center mr-4">
+                                                        <mat-form-field class="st-field">
+                                                            <input matInput placeholder="Name" type="text" formControlName="bankName">
+                                                        </mat-form-field>                                                                                                                                               
+                                                        <mat-form-field class="st-field">
+                                                                <input matInput placeholder="Country" type="text" formControlName="country">
+                                                        </mat-form-field>
+                                                        <mat-form-field class="st-field">
+                                                                <input matInput placeholder="Reg. Number" type="text" formControlName="regNumber">
+                                                        </mat-form-field>                                              
+                                                    </div> 
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                  </table>
+                            <table class="table">
+                                <thead class="text-info">
+                                    <th>
+                                        Check
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('bankName')" class="st-th">
+                                            Name<i *ngIf="sortBy==='bankName'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='bankName'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                        
+                                    </th>                                
+                                    <th>
+                                        <div (click)="setSort('country')" class="st-th">
+                                            Country<i *ngIf="sortBy==='country'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                   <i *ngIf="sortBy==='country'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>  
+                                        
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('regNumber')" class="st-th">
+                                            Reg. Number<i *ngIf="sortBy==='regNumber'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                        <i *ngIf="sortBy==='regNumber'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>  
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let company of companies">
+                                        <td><mat-checkbox></mat-checkbox></td>
+                                        <td><a routerLink='./detail/{{company.id}}'>{{company.name}}</a></td>                                     
+                                        <td class="txt-st">{{company.requisites?.address?.country}}</td>
+                                        <td class="txt-st">{{company.requisites?.regNumber}}</td>
+                                        <td><i routerLink='./edit/{{company.id}}' class="material-icons detail-link">create</i></td>
+                                        <td>
+                                            <i class="material-icons det-del" (click)="delCompany(company.id)">delete</i>        
+                                        </td>
+                                    </tr>
+                                </tbody> 
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

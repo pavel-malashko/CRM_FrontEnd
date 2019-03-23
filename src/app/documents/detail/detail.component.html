@@ -1,0 +1,36 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">Details of document</h4>
+                      <p class="card-category text-center">Details of document</p>
+                  </div>
+                  <div class="card-body mb-5">
+                      <div class="d-flex justify-content-center">
+                          <mat-list class="col-md-5">
+                              <mat-list-item>Date: {{document?.date | date}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>Type:  {{document?.type}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>Number:  {{document?.number}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>Contractor:  {{document?.contractor}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>Customer:  {{document?.customer}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>Amount: {{document?.amount}}{{document?.currency?.name}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>Comment:  {{document?.comment}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                            </mat-list>   
+                      </div>
+                      <div class="d-flex justify-content-center mt-4">
+                          <button mat-raised-button class="btn btn-success" routerLink='/documents'>Documents Page</button>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title text-center">Bank Accounts</h4>
+                        <p class="card-category text-center"> Info about bank accounts</p>
+                    </div>
+                    <div class="men-nav">
+                      <mat-paginator
+                          [length]="count"
+                          [pageSize]="perPage"
+                          [pageSizeOptions]="[10, 20, 50]"
+                          (page)="onChangePage($event)">
+                      </mat-paginator>
+                    </div>  
+                    <div class="card-body">
+                          <div class="table-responsive">
+                                <table class="table">
+                                        <tbody>                                      
+                                            <tr [formGroup]="searchForm">       
+                                                <td>
+                                                    <button mat-button color="primary" (click)='searchForm.reset()'><i class="material-icons">close</i></button>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex justify-content-around align-items-center mr-4">
+                                                        <mat-form-field class="st-field">
+                                                            <input matInput placeholder="Bank" type="text" formControlName="bank">
+                                                        </mat-form-field>                                                                                             
+                                                        <mat-form-field class="st-field">
+                                                            <input matInput placeholder="Code" type="text" formControlName="code">
+                                                        </mat-form-field>
+                                                        <mat-form-field class="st-field">
+                                                                <input matInput placeholder="iban" type="text" formControlName="iban">
+                                                        </mat-form-field>
+                                                        <mat-form-field class="st-field">
+                                                            <mat-select placeholder="Company" formControlName="company">
+                                                                <mat-option *ngFor="let comp of companies" [value]="comp.id">
+                                                                    {{comp.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                            </mat-form-field>          
+                                                        <mat-form-field class="st-field">
+                                                                <input matInput placeholder="Comment" type="text" formControlName="comment">
+                                                        </mat-form-field>
+                                                    </div> 
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                  </table>
+                              <table class="table">
+                                  <thead class="text-info">
+                                      <th>Check</th>
+                                      <th> 
+                                            <div (click)="setSort('bank')" class="st-th">
+                                                Bank<i *ngIf="sortBy==='bank'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                    <i *ngIf="sortBy==='bank'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                            </div>
+                                      </th>
+                                      <th> 
+                                          <div (click)="setSort('code')" class="st-th">
+                                                Code<i *ngIf="sortBy==='code'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='code'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                          </div>
+                                      </th>
+                                      <th>
+                                            <div (click)="setSort('iban')" class="st-th">
+                                                Iban<i *ngIf="sortBy==='iban'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                    <i *ngIf="sortBy==='iban'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                            </div>
+                                      </th>
+                                      <th>
+                                            <div (click)="setSort('company')" class="st-th">
+                                                Company<i *ngIf="sortBy==='company'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                        <i *ngIf="sortBy==='company'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                            </div>
+                                      </th>
+                                      <th>   
+                                          <div (click)="setSort('comment')" class="st-th">
+                                                Comment<i *ngIf="sortBy==='comment'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                       <i *ngIf="sortBy==='comment'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                          </div>
+                                      </th>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let bankAc of bankAccounts">
+                                          <td><mat-checkbox></mat-checkbox></td>
+                                          <td>{{bankAc?.bankName}}</td>
+                                          <td>{{bankAc?.codeType}} {{bankAc?.code}}</td>
+                                          <td>{{bankAc?.iban}} </td>
+                                          <td>{{bankAc?.company?.name}}</td>
+                                          <td>{{bankAc?.comment}}</td>
+                                      </tr>
+                                  </tbody> 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

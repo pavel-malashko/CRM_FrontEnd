@@ -1,0 +1,92 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">Create Document</h4>
+                      <p class="card-category text-center"> create document</p>
+                  </div>
+                
+                  <div class="card-body " [formGroup]="createForm">
+                    
+                    <div class="s-list">                     
+                      <div class="s-item">
+                        <mat-form-field>
+                          <mat-select placeholder="Type" formControlName="type">
+                            <mat-option *ngFor="let type of types" [value]="type.id">
+                              {{type.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="s-item">
+                        <mat-form-field>
+                          <input matInput placeholder="Amount" type="text" formControlName="amount">
+                        </mat-form-field>
+                      </div>
+                      <div class="s-item">
+                          <mat-form-field>
+                            <mat-select placeholder="Currency" formControlName="currency">
+                              <mat-option *ngFor="let cur of currencies" [value]="cur.id">
+                                {{cur.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                      </div> 
+                      <div class="s-item">
+                          <mat-form-field>
+                            <input matInput placeholder="Number" type="text" formControlName="number">
+                              <!-- <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">Please entering correct email!</mat-error> -->
+                          </mat-form-field>
+                        </div>
+                      <div class="s-item">
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="s-item">
+                            <mat-form-field>
+                              <mat-select placeholder="Contractor" formControlName="contractor">
+                                <mat-option *ngFor="let contr of contractors" [value]="contr.id">
+                                  {{contr.name}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                      </div>
+                      <div class="s-item">
+                          <mat-form-field>
+                            <mat-select placeholder="Customer" formControlName="customer">
+                              <mat-option *ngFor="let cust of customers" [value]="cust.id">
+                                {{cust.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    
+                        <div class="s-item">
+                          <mat-icon (click)="fileInput.click()">attach_file</mat-icon>
+                          <input hidden type="file" #fileInput (change)="fileInputChange($event)">
+                          <ul id="file-name" *ngFor="let file of openFile">
+                            <li>{{file.name}}</li>
+                          </ul>
+                        </div>
+                      <div class="s-item">
+                          <mat-form-field>
+                            <textarea matInput placeholder="Comment" type="text" formControlName="comment"></textarea>
+                          </mat-form-field>
+                        </div>
+                  </div>  
+                        <!-- <mat-form-field class="example-full-width">
+                          <textarea rows="6" type="text" matInput placeholder="requisites" formControlName="requisites"></textarea>
+                        </mat-form-field> -->
+                      <div class="s-item">
+                        <button mat-raised-button class="btn btn-success" (click)='create()' [disabled]='createForm.invalid'>Save</button>
+                      </div>   
+              </div>
+          </div>
+      </div>
+  </div>
+</div>  

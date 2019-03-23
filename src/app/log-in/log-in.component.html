@@ -1,0 +1,30 @@
+<div class="main-content">
+  <div class="container-fluid cont">
+    <div class="row login col-md-8 col-lg-6">
+        <div class="card">
+          <div class="card-header card-header-info card-block d-table-cell align-middle ">
+            <h4 class="card-title text-center">Login</h4>
+            <!-- <p class="card-category text-center">Please entering in cite!</p> -->
+          </div>
+          <div class="card-body" [formGroup]="loginForm">
+                <div class="d-flex justify-content-center">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Email address" type="email" formControlName="email">
+                      <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">Please entering correct email!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="d-flex justify-content-center mb-4">
+                  <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Password" formControlName="password">
+                      <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">Please entering valid password! ('it must contain at least 8 characters')</mat-error>
+                  </mat-form-field>
+                </div>
+              <div class=" text-center">
+                <button mat-raised-button type="submit" class="btn btn-success" [disabled]="loginForm.invalid" (click)="login(loginForm.value)">Log In</button>
+              </div>
+              <div class="clearfix"></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

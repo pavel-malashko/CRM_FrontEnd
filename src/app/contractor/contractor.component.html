@@ -1,0 +1,69 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">Partners</h4>
+                      <p class="card-category text-center"> Info about partners</p>
+                  </div>
+                  <div class="men-nav">
+                    <button routerLink='./create' mat-fab color="primary" class="ml-2">
+                            <i class="material-icons">add</i>
+                    </button>
+                    <mat-paginator
+                        [length]="count"
+                        [pageSize]="perPage"
+                        [pageSizeOptions]="[10, 20, 50]"
+                        (page)="onChangePage($event)"
+                        >
+                    </mat-paginator>
+                  </div>  
+                  <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-info">
+                                    <th>
+                                        Check
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Company
+                                    </th>
+                                    <th>
+                                        Requisites  
+                                    </th>
+                                    <th>
+                                        User  
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let partner of partners">
+                                        <td><mat-checkbox></mat-checkbox></td>
+                                        <td><a routerLink='./detail/{{partner.id}}'>{{partner?.name}}</a></td>  <!--  -->
+                                        <td>{{partner?.company?.name}}</td>
+                                        <td>{{partner?.requisites?.comment}}</td>
+                                        <td>{{partner?.requisites?.user}}</td>
+
+                                        <td><i class="material-icons detail-link" routerLink='./edit/{{partner.id}}'>create</i></td> <!--  -->
+                                        <td>
+                                            <i class="material-icons det-del" (click)="delPartner(partner.id)">delete</i>        
+                                        </td>
+                                    </tr>
+                                </tbody> 
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

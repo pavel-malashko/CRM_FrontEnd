@@ -1,0 +1,11 @@
+.s-list{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.s-item{
+    width: 40%;
+    margin: 1%;
+}

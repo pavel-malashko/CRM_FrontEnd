@@ -1,0 +1,6 @@
+.sidebar[data-color="danger"] li.active > a {
+    background: linear-gradient(135deg, #525AAD 0%, #252C5D 100%);
+}
+.log-out{
+    cursor: pointer;
+}

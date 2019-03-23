@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+   // background: url(https://my.bfb.by/login-bg.e7b060683c54794c144b.jpg) center/cover no-repeat;
+   background: #F7F7F7;
+}
+
+.sidebar[data-color="danger"] li.active > a {
+    background: linear-gradient(135deg, #525AAD 0%, #252C5D 100%);
+}
+.card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image){
+    background: linear-gradient(135deg, #525AAD 0%, #252C5D 100%);
+}
+
+.mat-snack-bar-container.success {
+   background: #39c8c8 ;
+   border: 1px solid #35b6b6;
+}
+.mat-snack-bar-container.danger {
+    background: #f8d7da ;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+ }
+.mat-simple-snackbar{
+    font-size: 16px;
+    justify-content: center;
+}
+th{
+    text-align: center; 
+}
+td,.bt-ac{
+    font-size: 15px;
+    font-family:'Open Sans', sans-serif;
+    text-align: center;
+}

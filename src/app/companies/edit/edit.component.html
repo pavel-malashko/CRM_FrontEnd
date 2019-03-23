@@ -1,0 +1,86 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">{{createForm.value.name}}</h4>
+                      <p class="card-category text-center">Edit Company</p>
+                  </div>
+
+                  <div class="card-body " [formGroup]="createForm">
+                    <div class="s-list">
+                      <div class="s-item">
+                        <mat-form-field>
+                          <input matInput placeholder="Name" type="text" formControlName="name">
+                        </mat-form-field>
+                      </div>
+                        <ng-container formGroupName="requisites">
+                              <div class="s-item">
+                                <mat-form-field>
+                                  <input matInput placeholder="Registration Number" type="text" formControlName="regNumber">
+                                </mat-form-field>
+                              </div>
+
+                              <div class="s-item">
+                                  <mat-form-field>
+                                    <input matInput placeholder="Tin Number" type="text" formControlName="tinNumber">
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="s-item">
+                                    <mat-form-field>
+                                      <input matInput placeholder="Vat Number" type="text" formControlName="vatNumber">
+                                    </mat-form-field>
+                                </div> 
+
+
+                              <ng-container formGroupName="address">
+                                  <div class="s-item">
+                                      <mat-form-field>
+                                        <input matInput placeholder="Country" type="text" formControlName="country">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="s-item">
+                                        <mat-form-field>
+                                          <input matInput placeholder="City" type="text" formControlName="city">
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="s-item">
+                                          <mat-form-field>
+                                            <input matInput placeholder="Street" type="text" formControlName="street">
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="s-item">
+                                            <mat-form-field>
+                                              <input matInput placeholder="Apt" type="text" formControlName="apt">
+                                            </mat-form-field>
+                                          </div>
+                                          <div class="s-item">
+                                              <mat-form-field>
+                                                <input matInput placeholder="Zip" type="text" formControlName="zip">
+                                              </mat-form-field>
+                                            </div>
+                              </ng-container>
+                              <div class="s-item">
+                                  <mat-form-field>
+                                    <textarea matInput placeholder="Comment" type="text" formControlName="comment"></textarea>
+                                  </mat-form-field>
+                                </div>  
+                                <mat-checkbox class="s-item" formControlName="inner">Inner</mat-checkbox>
+                              
+                        </ng-container>
+                        <!-- <mat-form-field class="example-full-width">
+                          <textarea rows="6" type="text" matInput placeholder="requisites" formControlName="requisites"></textarea>
+                        </mat-form-field> -->
+                      </div>
+                      <div class="d-flex justify-content-center">
+                          <button mat-raised-button class="btn btn-success" [disabled]="createForm.invalid" (click)="updateCompany()">Edit</button>
+                        </div>
+                    </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>

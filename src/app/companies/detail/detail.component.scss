@@ -1,0 +1,40 @@
+.s-list{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: wrap;
+    
+}
+
+.s-item{
+    width: 400px; 
+    border-bottom: 1px solid rgb(66, 66, 66); 
+    font-size: 16px;
+    margin: 2%;
+    color : hsl(187, 81%, 31%);
+}
+.detail-link, .det-del  {
+    cursor: pointer;
+}
+.create-account-form-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.create-account-form{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.bank-form{
+    margin: 1%;
+}
+.style-item{
+    width: 115px;
+}
+.style-form{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}

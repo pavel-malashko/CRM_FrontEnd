@@ -1,0 +1,146 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">Transactions</h4>
+                      <p class="card-category text-center"> Info about transactions</p>
+                  </div>
+                  <div class="men-nav">
+                    <button routerLink='./create' mat-fab color="primary" class="ml-2">
+                            <i class="material-icons">add</i>
+                    </button>
+                    <mat-paginator
+                        [length]="count"
+                        [pageSize]="perPage"
+                        [pageSizeOptions]="[10, 20, 50]"
+                        (page)="onChangePage($event)"
+                        >
+                    </mat-paginator>
+                  </div>  
+                  <div class="card-body">
+                        <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>                                      
+                                        <tr [formGroup]="searchForm">       
+                                            <td>
+                                                <button mat-button color="primary" (click)='searchForm.reset()'><i class="material-icons">close</i></button>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around align-items-center">
+                                                    <mat-form-field class="st-field">
+                                                        <input matInput [matDatepicker]="picker" placeholder="Date from"  formControlName="dateFrom">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="st-field">
+                                                        <input matInput [matDatepicker]="picker2" placeholder="Date to"  formControlName="dateTo">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div> 
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around align-items-center"> 
+                                                    <mat-form-field class="st-field">
+                                                        <input matInput placeholder="Amount from" type="number" formControlName="amountFrom">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="st-field">
+                                                            <input matInput placeholder="Amount to" type="number" formControlName="amountTo">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="st-field"> 
+                                                            <mat-select placeholder="Currency" formControlName="currency">
+                                                                <mat-option *ngFor="let cur of currencies" [value]="cur.id">
+                                                                    {{cur.name}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                    </mat-form-field>
+                                                </div>    
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <mat-form-field class="st-field"> 
+                                                        <mat-select placeholder="From" formControlName="fromAccount">
+                                                            <mat-option *ngFor="let from of companies" [value]="from.id">
+                                                                {{from.name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <mat-form-field class="st-field">
+                                                        <mat-select placeholder="To" formControlName="toAccount">
+                                                            <mat-option *ngFor="let to of companies" [value]="to.id">
+                                                                {{to.name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                              </table>
+                          </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-info">
+                                    <th>
+                                        Check
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('date')" class="st-th">
+                                            Date <i *ngIf="sortBy==='date'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='date'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                        
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('amount')" class="st-th">
+                                            Amount <i *ngIf="sortBy==='amount'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='amount'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                       
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('fromAccount')" class="st-th">
+                                            From <i *ngIf="sortBy==='fromAccount'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='fromAccount'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                           
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('toAccount')" class="st-th">
+                                            To <i *ngIf="sortBy==='toAccount'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                               <i *ngIf="sortBy==='toAccount'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                          
+                                    </th>
+                                    <th>   
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let transaction of transactions">
+                                        <td><mat-checkbox></mat-checkbox></td>  
+                                        <td>{{transaction?.date | date}}</td>
+                                        <td>{{transaction?.amount}} {{transaction?.currency?.name}}</td>                                    
+                                        <td>{{transaction?.fromAccount?.company?.name}}</td>
+                                        <td>{{transaction?.toAccount?.company?.name}}</td>
+                                        <td><i class="material-icons detail-link" routerLink='./edit/{{transaction.id}}'>create</i></td>
+                                        <td><i class="material-icons det-del" (click)="delTransaction(transaction.id)">delete</i></td>
+                                    </tr>
+                                </tbody> 
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

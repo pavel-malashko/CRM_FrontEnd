@@ -1,0 +1,170 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">Documents</h4>
+                      <p class="card-category text-center"> Info about documnets</p>
+                  </div>
+                  <div class="men-nav">
+                    <button routerLink='./create' mat-fab color="primary" class="ml-2">
+                            <i class="material-icons">add</i>
+                    </button>
+                    <mat-paginator
+                        [length]="count"
+                        [pageSize]="perPage"
+                        [pageSizeOptions]="[10, 20, 50]"
+                        (page)="onChangePage($event)"
+                        >
+                    </mat-paginator>
+                  </div> 
+                  <div class="table-responsive">
+                    <table class="table">
+                        <tbody>                                      
+                            <tr [formGroup]="searchForm">       
+                                <td>
+                                    <button mat-button color="primary" (click)='searchForm.reset()'><i class="material-icons">close</i></button>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-around align-items-center mr-4">
+                                        <mat-form-field class="st-field">
+                                            <input matInput [matDatepicker]="picker" placeholder="Date from"  formControlName="dateFrom">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field">
+                                            <input matInput [matDatepicker]="picker2" placeholder="Date to"  formControlName="dateTo">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field"> 
+                                            <mat-select placeholder="Type" formControlName="type">
+                                                <mat-option *ngFor="let type of types" [value]="type.id">
+                                                    {{type}}
+                                                </mat-option>
+                                            </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field class="st-field">
+                                        <input matInput placeholder="Number" type="number" formControlName="number">
+                                    </mat-form-field>
+                                    <mat-form-field class="st-field">
+                                            <mat-select placeholder="Contractor" formControlName="contractor">
+                                                <mat-option *ngFor="let contr of companies" [value]="contr.id">
+                                                    {{contr.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field">
+                                            <mat-select placeholder="Customer" formControlName="customer">
+                                                <mat-option *ngFor="let cust of companies" [value]="cust.id">
+                                                    {{cust.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field">
+                                            <input matInput placeholder="Amount from" type="number" formControlName="amountFrom">
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field">
+                                                <input matInput placeholder="Amount to" type="number" formControlName="amountTo">
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field"> 
+                                                <mat-select placeholder="Currency" formControlName="currency">
+                                                    <mat-option *ngFor="let cur of currencies" [value]="cur.id">
+                                                        {{cur.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="st-field">
+                                                <input matInput placeholder="Comment" type="text" formControlName="comment">
+                                        </mat-form-field>
+                                    </div> 
+                                </td>
+                            </tr>
+                        </tbody> 
+                  </table>
+              </div> 
+                  <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-info">
+                                    <th>
+                                        Check
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('date')" class="st-th">
+                                            Date<i *ngIf="sortBy==='date'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='date'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                    </th>
+                                    <th> 
+                                        <div (click)="setSort('type')" class="st-th">
+                                            Type<i *ngIf="sortBy==='type'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                <i *ngIf="sortBy==='type'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                        
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('number')" class="st-th">
+                                            Number<i *ngIf="sortBy==='number'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                    <i *ngIf="sortBy==='number'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>    
+                                         
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('contractor')" class="st-th">
+                                            Contractor<i *ngIf="sortBy==='contractor'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                      <i *ngIf="sortBy==='contractor'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('customer')" class="st-th">
+                                            Customer<i *ngIf="sortBy==='customer'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                    <i *ngIf="sortBy==='customer'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>  
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('amount')" class="st-th">
+                                             Amount<i *ngIf="sortBy==='amount'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                    <i *ngIf="sortBy==='amount'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div (click)="setSort('comment')" class="st-th">
+                                            Comment<i *ngIf="sortBy==='comment'&& sortDirection=='DESC'" class="material-icons st-i">arrow_downward</i>
+                                                    <i *ngIf="sortBy==='comment'&& sortDirection=='ASC'" class="material-icons st-i">arrow_upward</i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        File
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let document of documents">
+                                        <td><mat-checkbox></mat-checkbox></td>  
+                                        <td>{{document?.date | date}}</td>
+                                        <td>{{document?.type?.name}}</td>
+                                        <td>{{document?.number}}</td>
+                                        <td>{{document?.contractor?.name}}</td>
+                                        <td>{{document?.contractor?.name}}</td>
+                                        <td>{{document?.amount}}{{document?.currency?.name}}</td> 
+                                        <td>{{document?.comment}}</td> 
+                                        <td><a href="{{document?.file}}" download><i class="material-icons">cloud_download</i></a></td>
+                                        <td><i class="material-icons detail-link" routerLink='./edit/{{document.id}}'>create</i></td>
+                                        <td><i class="material-icons det-del" (click)="delDocument(document.id)">delete</i></td>
+                                    </tr>
+                                </tbody> 
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

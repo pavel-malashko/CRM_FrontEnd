@@ -1,0 +1,156 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title text-center">{{company?.name}}</h4>
+                      <p class="card-category text-center">Details of Company</p>
+                  </div>
+                  <div class="card-body">
+                          <div class="s-list ">
+                                <div class="s-item">
+                                    Company: {{company?.name}}  
+                                </div>
+                                <div class="s-item">
+                                    Reg number:  {{company?.requisites?.regNumber}}  
+                                </div>
+                                <div class="s-item">
+                                    Tin number:  {{company?.requisites?.tinNumber}}
+                                </div>
+                                <div class="s-item">
+                                   Vat number:  {{company?.requisites?.vatNumber}}
+                                </div>
+                                <div class="s-item">
+                                    Country:  {{company?.requisites?.address?.country}}
+                                </div>
+                                <div class="s-item">
+                                    City:  {{company?.requisites?.address?.city}}
+                                </div>
+                                <div class="s-item">
+                                    Street:  {{company?.requisites?.address?.street}}                               
+                                </div>
+                                <div class="s-item">
+                                    Building:  {{company?.requisites?.address?.building}}                                   
+                                </div>
+                                <div class="s-item">
+                                    Apt:  {{company?.requisites?.address?.apt}}                                   
+                                </div>
+                                <div class="s-item">
+                                    Zip:  {{company?.requisites?.address?.zip}}
+                                </div>
+                                <div class="s-item">
+                                    Comment:  {{company?.requisites?.comment}}                                   
+                                </div>                                                     
+                      </div>
+                      <div class="card-body">
+                          <div class="create-account-form-container">
+                              <div class="create-account-form" [formGroup]="accountForm" *ngIf="showForm">
+                                  <div class="bank-form">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Bank name" type="text" formControlName="bankName">
+                                        </mat-form-field>
+                                  </div>
+                                  
+                                  <div class="bank-form">
+                                        <mat-form-field>
+                                                <mat-select placeholder="Code type" formControlName="codeType">
+                                                        <mat-option *ngFor="let type of types" [value]="type">
+                                                          {{type}}
+                                                        </mat-option>
+                                                      </mat-select>
+                                        </mat-form-field>  
+                                   </div>
+                                   <div class="bank-form">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Code" type="text" formControlName="code">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="bank-form">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Iban" type="text" formControlName="iban">
+                                            </mat-form-field>
+                                        </div>
+                                    <div class="bank-form">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Comment" type="text" formControlName="comment">
+                                        </mat-form-field>
+                                    </div>
+                              </div>
+                              <div class="create-account-btns">
+                                  <div *ngIf="!showForm" class="bt-ac">Add Bank Account
+                                    <button  mat-mini-fab color="primary" (click)='showAddAccountForm()'><i class="material-icons">add</i></button></div>
+                                    <button *ngIf="showForm" mat-button color="primary" (click)='saveAccountForm()'><i class="material-icons">save</i></button>
+                                    <button *ngIf="showForm" mat-button color="primary" (click)='hideAccountForm()'><i class="material-icons">close</i></button>
+                              </div>
+                              
+                          </div>
+                        <div class="table-responsive" [formGroup]="editAccountForm">
+                                
+                            <table class="table">
+                                <thead class="text-info">
+                                    <th>Bank</th>
+                                    <th>Code</th>
+                                    <th>Iban</th>
+                                    <th>Comment</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>         
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let bankAc of bankAccounts">
+                                                <td>
+                                                    <span *ngIf="currentEditBankAccount.id !== bankAc.id">{{bankAc?.bankName}}</span>
+                                                    <mat-form-field *ngIf="currentEditBankAccount.id === bankAc.id">
+                                                        <input matInput placeholder="Bank name" type="text" formControlName="bankName">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    
+                                                    <span *ngIf="currentEditBankAccount.id !== bankAc.id">{{bankAc?.codeType}}: {{bankAc?.code}}</span>
+                                                    <div class="style-form">
+                                                        <div class="style-item">
+                                                            <mat-form-field *ngIf="currentEditBankAccount.id === bankAc.id">
+                                                                <mat-select placeholder="Code type" formControlName="codeType">
+                                                                        <mat-option *ngFor="let type of types" [value]="type">
+                                                                        {{type}}
+                                                                        </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="style-item">   
+                                                            <mat-form-field *ngIf="currentEditBankAccount.id === bankAc.id">
+                                                                <input matInput placeholder="Code" type="text" formControlName="code">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span *ngIf="currentEditBankAccount.id !== bankAc.id">{{bankAc?.iban}}</span>
+                                                    <mat-form-field *ngIf="currentEditBankAccount.id === bankAc.id">
+                                                            <input matInput placeholder="Iban" type="text" formControlName="iban">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <span *ngIf="currentEditBankAccount.id !== bankAc.id">{{bankAc?.comment}}</span>
+                                                    <mat-form-field *ngIf="currentEditBankAccount.id === bankAc.id">
+                                                            <input matInput placeholder="Comment" type="text" formControlName="comment">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <i *ngIf="currentEditBankAccount.id === bankAc.id" class="material-icons detail-link" (click)="updateBankAccount()">save</i>
+                                                    <i *ngIf="currentEditBankAccount.id !== bankAc.id" class="material-icons detail-link" (click)="editBankAccount(bankAc)">create</i>
+                                                </td>
+                                                <td><i class="material-icons det-del" (click)="delBankAccount(bankAc.id)">delete</i></td> 
+                                    </tr>
+                                </tbody> 
+                          </table>
+                      </div>
+                  </div>
+                      <div class="d-flex justify-content-center mt-4">
+                          <button mat-raised-button class="btn btn-success" routerLink='/companies'>Companies Page</button>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

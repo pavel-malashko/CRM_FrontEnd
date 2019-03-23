@@ -1,0 +1,99 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title text-center">Create Partner</h4>
+                        <p class="card-category text-center"> Info about partners</p>
+                    </div>
+                  
+                    <div class="card-body" [formGroup]="createForm">
+                        <div class="s-list">
+                        <div class="s-item">
+                          <mat-form-field class="">
+                            <input matInput placeholder="Name" type="text" formControlName="name">
+                              <!-- <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">Please entering correct email!</mat-error> -->
+                          </mat-form-field>
+                        </div>
+
+                        <div class="s-item">
+                          <mat-form-field>
+                            <mat-select placeholder="Company" formControlName="company">
+                              <mat-option *ngFor="let company of companies" [value]="company.id">
+                                {{company.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        
+                          <div formGroupName="requisites">
+                                <div class="s-item">
+                                  <mat-form-field class="">
+                                    <input matInput placeholder="Registration Number" type="text" formControlName="regNumber">
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="s-item">
+                                    <mat-form-field class="">
+                                      <input matInput placeholder="Tin Number" type="text" formControlName="tinNumber">
+                                    </mat-form-field>
+                                  </div>
+
+                                  <div class="s-item">
+                                      <mat-form-field class="">
+                                        <input matInput placeholder="Vat Number" type="text" formControlName="vatNumber">
+                                      </mat-form-field>
+                                    </div>
+
+
+                                <div formGroupName="address">
+                                    <div class="s-item">
+                                        <mat-form-field class="">
+                                          <input matInput placeholder="Country" type="text" formControlName="country">
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="s-item">
+                                          <mat-form-field class="">
+                                            <input matInput placeholder="City" type="text" formControlName="city">
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="s-item">
+                                            <mat-form-field class="">
+                                              <input matInput placeholder="Street" type="text" formControlName="street">
+                                            </mat-form-field>
+                                          </div>
+                                          <div class="s-item">
+                                              <mat-form-field class="">
+                                                <input matInput placeholder="Apt" type="text" formControlName="apt">
+                                              </mat-form-field>
+                                            </div>
+                                            <div class="s-item">
+                                                <mat-form-field class="">
+                                                  <input matInput placeholder="Zip" type="text" formControlName="zip">
+                                                </mat-form-field>
+                                              </div>
+                                </div>
+                                <div class="s-item">
+                                    <mat-form-field class="">
+                                      <textarea matInput placeholder="Comment" type="text" formControlName="comment"></textarea>
+                                    </mat-form-field>
+                                  </div>  
+
+
+                          </div>
+                          <!-- <mat-form-field class="example-full-width">
+                            <textarea rows="6" type="text" matInput placeholder="requisites" formControlName="requisites"></textarea>
+                          </mat-form-field> -->
+                        </div>
+                        <div class="d-flex justify-content-center">
+                          <button mat-raised-button class="btn btn-success" (click)='create()' [disabled]='createForm.invalid'>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>  
